@@ -1,0 +1,63 @@
+.wrapper {
+    min-height: 90vh;
+}
+
+.wrapper h1 {
+    text-align: center;
+    padding-top: 10%;
+}
+
+.wrapper p {
+    text-align: center;
+}
+
+.wrapper div {
+    text-align: center;
+}
+
+.textWrap {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.textWrap textarea {
+    min-width: 50%;
+    min-height: 16vh;
+    padding: 20px;
+    height: 30%;
+    line-height: 16px;
+    box-shadow: 0px 4px 4px rgba(82, 99, 102, 0.08), -4px -4px 10px rgba(82, 99, 102, 0.08);
+}
+
+.textWrap button {
+    margin-top: 1.5rem;
+    width: 50%;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    color: black;
+    box-shadow: 0px 4px 4px rgba(82, 99, 102, 0.08), -4px -4px 10px rgba(82, 99, 102, 0.08);
+}
+
+.sentMessage {
+    padding-top: 15%;
+}
+
+@media (max-width: 900px) {
+    .sentMessage {
+        padding-top: 40%;
+    }
+
+    .textWrap textarea {
+        min-width: 85%;
+    }
+
+    .textWrap button {
+        min-width: 85%;
+    }
+
+    .wrapper h1 {
+        padding-top: 25%;
+    }
+}

@@ -1,0 +1,35 @@
+service: am-i-funny-website
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  timeout: 30 # 30 seconds is the maximal allowed by API Gateway
+  stage: ${opt:stage}
+  region: 'eu-west-1'
+  memorySize: 256
+  environment:
+    NODE_ENV: production
+
+plugins:
+  - serverless-apigw-binary
+
+package:
+  exclude:
+    - node_modules/.cache/**
+    - .cache/**
+    - .idea/**
+    - .git/**
+    - lambdas/*/**
+
+custom:
+  apigwBinary:
+    types:
+      - '*/*'
+
+functions:
+  amIFunnyWebsite:
+    handler: lambda.handler
+    events:
+      - http: ANY /
+      - http: ANY /{any+}
+      - cors: true

@@ -3,13 +3,35 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "env-cmd -f .env.local next dev",
+    "build": "env-cmd -f .env.local next build",
+    "start": "env-cmd -f .env.local next start",
+    "clean": "rm -rf .next && rm -rf node_modules/.cache",
+    "reinstall": "rm -rf .next && rm -rf node_modules && npm i",
+    "clean-nm": "npm prune",
+    "test": "jest --config testconfig.json",
+    "next:dev": "env-cmd -f .env.development.local next build",
+    "next:prod": "env-cmd -f .env.production.local next build",
+    "package:dev": "serverless package --stage dev --aws-profile amIFunny",
+    "package:prod": "serverless package --stage prod --aws-profile amIFunny",
+    "deploy:dev": "npm run clean && npm run next:dev && npm run package:dev && serverless deploy --stage dev --node_env development --verbose --aws-profile amIFunny",
+    "deploy:prod": "npm run clean && npm run next:prod && npm run package:prod && serverless deploy --stage prod --node_env production --verbose --aws-profile amIFunny && npm run invalidate-cache",
+    "invalidate-cache": "aws cloudfront create-invalidation --distribution-id DISTRIBUTION_ID --paths \"/*\" --profile amIFunny"
   },
   "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
     "next": "10.2.0",
+    "next-pwa": "^5.2.21",
+    "next-redux-wrapper": "^6.0.2",
+    "prop-types": "^15.7.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
-  }
+    "react-dom": "17.0.2",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
+    "redux-api-middleware": "^3.2.1",
+    "serverless-apigw-binary": "^0.4.4",
+    "serverless-http": "^2.7.0"
+  },
+  "devDependencies": {}
 }

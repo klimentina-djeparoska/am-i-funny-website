@@ -1,0 +1,13 @@
+{
+  "name": "feedback",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "local:dev": "serverless invoke local --function saveFeedback --path data.json --aws-profile amIFunny --stage dev",
+    "deploy:dev": "serverless deploy --stage dev --verbose --aws-profile amIFunny",
+    "deploy:prod": "serverless deploy --stage prod --verbose --aws-profile amIFunny"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.903.0"
+  }
+}
