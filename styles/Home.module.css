@@ -65,6 +65,33 @@
   font-size: 6.5vh;
 }
 
+.textCenter {
+  text-align: center;
+}
+
+.note {
+  color: red;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.testButton {
+  background: #c70404;
+  color: white !important;
+  font-weight: 500;
+}
+
+.testButton:disabled {
+  cursor: not-allowed;
+}
+
+.not {
+  font-weight: 500;
+  color: #c70404;
+}
+
 @media (max-width: 900px) {
   .title {
     font-size: 6.5vh;

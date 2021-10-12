@@ -45,7 +45,7 @@ const LeaveFeedback = () => {
                             <h1>How was the prediction? </h1>
                             <div className={styles.textWrap}>
                                 <textarea value={text} onChange={e => setText(e.target.value)}/>
-                                <button onClick={() => feedback()}>Save</button>
+                                <button disabled={text === ''} onClick={() => feedback()}>Save</button>
                             </div>
                         </div>
                 }

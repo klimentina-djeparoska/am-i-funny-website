@@ -1,15 +1,10 @@
 {
-  "name": "prediction",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "local:dev": "serverless invoke local --function saveFeedback --path data.json --aws-profile personal --stage dev",
-    "deploy:dev": "serverless deploy --stage dev --verbose --aws-profile personal",
-    "deploy:prod": "serverless deploy --stage prod --verbose --aws-profile personal"
-  },
+  "name": "serverless-flask-call-endpoint",
+  "description": "",
+  "version": "0.1.0",
   "dependencies": {},
   "devDependencies": {
     "serverless-python-requirements": "^5.1.1",
-    "serverless-wsgi": "^1.7.8"
+    "serverless-ssm-fetch": "^1.0.3"
   }
 }
