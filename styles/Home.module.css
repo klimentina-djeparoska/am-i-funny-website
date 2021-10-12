@@ -11,7 +11,7 @@
 }
 
 .main {
-  padding: 5rem 0;
+  padding: 5rem 0 3rem;
   flex: 1;
   flex-direction: column;
   justify-content: center;
@@ -93,8 +93,16 @@
 }
 
 @media (max-width: 900px) {
+  .container {
+    min-height: 81vh;
+  }
+
   .title {
     font-size: 6.5vh;
+  }
+
+  .innerWrap {
+    margin: 0 !important;
   }
 
   .middleOr {
