@@ -10,16 +10,17 @@ const Home = () => {
     const dispatch = useDispatch();
 
     const test = () => {
-        if (enteredText === '') {
+        if (enteredText && !enteredText.trim()) {
             alert('Please enter some text first');
         } else {
             dispatch(testModel(enteredText)).then(res => {
                 if(res.type === TEST_MODEL_SUCCESS) {
-                    const text = 'The model thinks your text is ' + res.payload[0] + ', with probability of ' + res.payload[1].toFixed(2) + '.';
+                    const text = 'The model thinks your text is ' + res.payload[0] + '. It returned ' + res.payload[1].toFixed(2) + '%.';
                     setResultText(text);
                     setEnteredText('');
                 } else {
                     console.error(res.payload.message);
+                    setResultText('The server is currently not active, because of high costs I turn it off when not used. Please contact me and I will let you know, when it will be back online. Thank you :)');
                 }
             });
         }
@@ -52,7 +53,7 @@ const Home = () => {
                     </p>
                 </div>
                 <div className={styles.enterText}>
-                    <textarea value={enteredText} onChange={e => enteredTextChange(e.target.value)}/>
+                    <textarea maxLength="300" value={enteredText} onChange={e => enteredTextChange(e.target.value)}/>
                     <button disabled={enteredText === ''} className={styles.testButton} onClick={() => test()}>TEST</button>
                 </div>
                 {

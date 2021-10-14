@@ -7,6 +7,17 @@ import string
 # grab environment variables
 ENDPOINT_NAME = os.environ['ENDPOINT_NAME']
 runtime= boto3.client('runtime.sagemaker')
+import math
+
+def stable_sigmoid(x):
+    if x >= 0:
+        z = math.exp(-x)
+        sig = 1 / (1 + z)
+        return sig
+    else:
+        z = math.exp(x)
+        sig = z / (1 + z)
+        return sig
 
 
 def download_vocabulary ():
@@ -71,20 +82,21 @@ def lambda_handler(event, context):
     data = json.loads(json.dumps(event))
     print(data['body'])
 
-    payload = format_data_for_prediction(data['body'])
-    print(payload)
-    converted = json.dumps(payload)
+    # payload = format_data_for_prediction(data['body'])
+    # print(payload)
+    # converted = json.dumps(payload)
 
     response = runtime.invoke_endpoint(EndpointName=ENDPOINT_NAME,
-                                       ContentType='application/json',
-                                       Body=converted)
+                                       ContentType='text/csv',
+                                       Body=data['body'])
     print('result from endpoint: ', response)
     result = json.loads(response['Body'].read().decode())
     print('prediction', result)
 
     pred = result['predictions'][0][0]
-    predicted_label = 'funny' if pred > 0.5 else 'not funny'
-    result_data = [predicted_label, pred]
+    percentage = stable_sigmoid(pred) * 100
+    predicted_label = 'funny' if percentage > 50 else 'not funny'
+    result_data = [predicted_label, percentage]
 
     result = {
         "statusCode": 200,
