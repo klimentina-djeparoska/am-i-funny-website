@@ -17,7 +17,6 @@ const Home = () => {
                 if(res.type === TEST_MODEL_SUCCESS) {
                     const text = 'The model thinks your text is ' + res.payload[0] + '. It returned ' + res.payload[1].toFixed(2) + '%.';
                     setResultText(text);
-                    setEnteredText('');
                 } else {
                     console.error(res.payload.message);
                     setResultText('The server is currently not active, because of high costs I turn it off when not used. Please contact me and I will let you know, when it will be back online. Thank you :)');
